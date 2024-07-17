@@ -34,6 +34,7 @@ public class SecurityConfiguration {
                         .antMatchers("/api/gini/**").permitAll()
                         .antMatchers("/api/reports/**").permitAll()
                         .antMatchers("/api/reports").permitAll()
+                        .antMatchers("/api/countrydata").permitAll()
                         .anyRequest().authenticated())  // Secure all other endpoints
                 .httpBasic();  // Use basic authentication
         return http.build();
