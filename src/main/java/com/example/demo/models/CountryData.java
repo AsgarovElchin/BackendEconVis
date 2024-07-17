@@ -10,6 +10,9 @@ public class CountryData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "country_id")
+    private Long countryId;
+
     @Column(name = "country_name")
     private String countryName;
 
@@ -30,6 +33,14 @@ public class CountryData {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 
     public String getCountryName() {

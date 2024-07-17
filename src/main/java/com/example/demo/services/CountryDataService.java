@@ -1,7 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.models.CountryData;
-import com.example.demo.repositories.CountryDataRepository;
+import com.example.demo.models.Report;
+import com.example.demo.repositories.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,15 @@ import java.util.Map;
 public class CountryDataService {
 
     @Autowired
-    private CountryDataRepository countryDataRepository;
+    private ReportRepository reportRepository;
 
-    public Map<String, Object> getCountryData(List<String> countries) {
-        List<CountryData> data = countryDataRepository.findByCountryNameIn(countries);
+    public Map<String, Object> getCountryData(Long countryId) {
+        List<Report> reports = reportRepository.findByCountryId(countryId);
         Map<String, Object> result = new HashMap<>();
 
-        // Process data and structure it as needed
-        for (CountryData item : data) {
-            Map<String, Object> countryData = (Map<String, Object>) result.computeIfAbsent(item.getCountryName(), k -> new HashMap<String, Object>());
-            countryData.put(item.getIndicator() + "_" + item.getYear(), item.getValue());
+        for (Report report : reports) {
+            Map<String, Object> indicatorData = (Map<String, Object>) result.computeIfAbsent(report.getIndicator().getName(), k -> new HashMap<String, Object>());
+            indicatorData.put(String.valueOf(report.getYear().getYear()), report.getData());
         }
 
         return result;

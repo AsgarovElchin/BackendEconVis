@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -20,8 +19,8 @@ public class CountryDataController {
     private CountryDataService countryDataService;
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> getCountryData(@RequestParam List<String> countries) {
-        Map<String, Object> data = countryDataService.getCountryData(countries);
+    public ResponseEntity<Map<String, Object>> getCountryData(@RequestParam Long countryId) {
+        Map<String, Object> data = countryDataService.getCountryData(countryId);
         return ResponseEntity.ok(data);
     }
 }
